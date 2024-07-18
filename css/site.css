@@ -1,0 +1,98 @@
+:root{
+    --tm-dark-color: #212121;
+    --tm-light-color: #ebebeb;
+
+    --tm-title-font: "Bebas Neue", sans-serif;
+    --tm-subtitle-font: "Fira Sans", sans-serif;
+    --tm-heading-font: "Bebas Neue", sans-serif;
+    --tm-body-font: "Roboto", sans-serif;
+}
+
+
+/* #region main template */
+body, html{
+    height:100%;
+}
+
+body{
+    display:flex;
+    flex-direction: column;
+}
+
+main{
+    flex: 1 0 auto;
+}
+
+footer{
+    flex-shrink: 0;
+}
+/* #endregion main template */
+
+/* #region element overrides*/
+h6, .h6, h5, .h5, h4, .h4, h4, .h3, h2, .h2, h1, .h1 {
+    font-family: var(--tm-heading-font);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--tm-title-color);
+    letter-spacing: .1rem;
+}
+
+a {
+    color: var(--tm-theme-500);
+}
+
+a:hover {
+    color: var(--tm-theme-400);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--tm-theme-600);
+    --bs-btn-border-color: var(--tm-theme-600);
+    --bs-btn-hover-bg: var(--tm-theme-700);
+    --bs-btn-hover-border-color: var(--tm-theme-700);
+}
+/* #endregion element overrides*/
+
+body{
+    color: var(--tm-dark-color);
+    background: #ECE9E6;  
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6); 
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.applogo{
+    max-width: 400px;
+}
+
+.mainTitle{
+    font-size: 2rem;
+}
+
+.subTitle{
+    font-size: 1.2rem;
+}
+
+.techStack i{
+    font-size: 3rem;
+}
+
+nav{
+    background-color: var(--tm-theme-900);
+}
+
+footer{
+    background: var(--tm-theme-900);
+    color: var(--tm-light-color);
+}
+
+footer i{
+    font-size: 2rem;
+}
+
+footer i:hover{
+    color: var(--cf-theme-200)
+}
