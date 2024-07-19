@@ -76,10 +76,10 @@
             <div class="row row-cols-1 g-3">
               <div class="col text-center text-md-start">
                 <div class="btn-group" role="group" id="btnBar">
-                  <input type="radio" class="btn-check" name="btnRadio" id="btnNowPlaying" autocomplete="off" checked>
+                  <input onchange="displayNowPlayingMovies()" type="radio" class="btn-check" name="btnRadio" id="btnNowPlaying" autocomplete="off" checked>
                   <label class="btn btn-outline-success" for="btnNowPlaying">Now Playing</label>
 
-                  <input type="radio" class="btn-check" name="btnRadio" id="btnPopular" autocomplete="off">
+                  <input onchange="displayPopularMovies()" type="radio" class="btn-check" name="btnRadio" id="btnPopular" autocomplete="off">
                   <label class="btn btn-outline-success" for="btnPopular">Popular</label>
 
                   <input type="radio" class="btn-check" name="btnRadio" id="btnFavorites" autocomplete="off">
@@ -139,9 +139,9 @@
             </div>
           </div>
           <div class="card-footer d-flex justify-content-between">
-            <button class="btn btn-outline-success" data-fav="false">Add Fav</button>
-            <button class="btn btn-outline-danger" data-fav="true">Remove Fav</button>
-            <a href="" class="btn btn-outline-primary">More Info</a>
+            <button class="btn btn-outline-success" data-fav="false" onclick="addFavoriteMovie(this)">Add Fav</button>
+            <button class="btn btn-outline-danger" data-fav="true" onclick="removeFavoriteMovie(this)">Remove Fav</button>
+            <a href="" class="btn btn-primary">More Info</a>
           </div>
         </div>
       </div>
@@ -156,6 +156,9 @@
     <script>
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
       const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+    <script>
+
     </script>
     <script src="/js/tmdbAPI.js"></script>
     <script src="/js/site.js"></script>
