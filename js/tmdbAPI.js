@@ -92,3 +92,31 @@ async function getMovie(movieId){
         return null;
     }
 }
+
+async function getMovieRating(movieId){
+        //https://api.themoviedb.org/3/search/movie
+    const releaseDateUrl = `https://api.themoviedb.org/3/movie/${movieId}/release_dates`;
+
+    try{
+        let response = await fetch(releaseDateUrl,{
+            headers:{
+                'Authorization': `Bearer ${apiKey}`
+                
+            }
+        });
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        let releaseDates = await response.json();
+
+        let usReleaseDates = releaseDates.results.find(rd => rd.iso_3166_1 === 'US');
+
+        if(!usReleaseDates) return "NR";
+
+        let releaseDate = usReleaseDates.release_dates.find(rd => rd.certification != "");
+
+        return releaseDate ? releaseDate.certification : "NR";
+    } catch (error){
+        console.error(`Release Date Fetch Error: ${error}`);
+        return "NR";
+    }
+}

@@ -1,4 +1,4 @@
-displayNowPlayingMovies()
+
 
 //display popular movies
 async function displayPopularMovies(){
@@ -35,6 +35,57 @@ async function displaySearchResults(){
     document.getElementById("page-title").innerHTML = `Search results for ${query}`;
     displayMovies(movies);
     uncheckButtons();
+}
+
+//display the details for the given movie
+//the id will be passed by the query string
+//used on the movieDetails page
+async function displayMovieDetails(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const defaultMovieId = "348350";
+    let movieId = urlParams.get("id") || defaultMovieId;
+
+    let movie = await getMovie(movieId);
+
+    if(!movie){
+        console.log(`Movie with id ${movieId} not found. Showing default movie instead`)
+        movieId = defaultMovieId;
+        movie = await getMovie(movieId);
+    }
+
+    let movieDetails = document.getElementById("movie-details");
+    let backdrop_path = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+    if(movie.backdrop_path == null){
+        backdrop_path = "img/Backdrop.jpg";
+    }
+
+    movieDetails.style.background = `url(${backdrop_path}), linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.9))`;
+    movieDetails.style.backgroundPosition = "cover";
+    movieDetails.style.backgroundRepeat = "no-repeat";
+    movieDetails.style.backgroundBlendMode = "overlay";
+
+    //set the poster image
+    let poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    if(movie.poster_path == null){
+        poster_path = `/img/poster.png`;
+    }
+
+    //display the movie poster
+    document.getElementById("movie-poster").src = poster_path;
+
+    //display the movie title
+    document.getElementById("movie-title").innerText = movie.title;
+
+    //display the movie certification
+    document.getElementById("movie-certification").innerText = await getMovieRating(movie.id);
+
+    //display release date
+    document.getElementById("movie-release").innerText = (new Date(movie.release_date)).toLocaleDateString();
+
+    //display runtime
+    let minutes = movie.runtime % 60;
+    let hours = (movie.runtime - minutes) / 60;
+    document.getElementById("movie-runtime").textContent = `${hours}h ${minutes}m`;
 }
 
 function displayMovies(movies){
@@ -80,6 +131,9 @@ function displayMovies(movies){
             addFavButton.style.display = 'block';
             removeFavButton.style.display = 'none';
         }
+
+        let infoButton = movieCard.querySelector('[data-detail]');
+        infoButton.href = `/movieDetails.html?id=${movie.id}`;
 
         movieRow.appendChild(movieCard);
 

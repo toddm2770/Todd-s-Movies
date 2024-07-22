@@ -141,7 +141,7 @@
           <div class="card-footer d-flex justify-content-between">
             <button class="btn btn-outline-success" data-fav="false" onclick="addFavoriteMovie(this)">Add Fav</button>
             <button class="btn btn-outline-danger" data-fav="true" onclick="removeFavoriteMovie(this)">Remove Fav</button>
-            <a href="" class="btn btn-primary">More Info</a>
+            <a href="/movieDetails.html" class="btn btn-primary" data-detail>More Info</a>
           </div>
         </div>
       </div>
@@ -162,6 +162,9 @@
     </script>
     <script src="/js/tmdbAPI.js"></script>
     <script src="/js/site.js"></script>
+    <script>
+      displayNowPlayingMovies();
+    </script>
 </body>
 
 </html>

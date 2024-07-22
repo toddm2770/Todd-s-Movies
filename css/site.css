@@ -96,3 +96,31 @@ footer i{
 footer i:hover{
     color: var(--cf-theme-200)
 }
+
+/* #region styles for movieDetails.html */
+#movie-poster {
+    border-radius: 25px;
+    border-color: var(--tm-theme-900);
+    border-width: 5px;
+    border-style: solid;
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
+
+#movie-wrapper {
+    backdrop-filter: blur(2px);
+}
+
+#movie-details {
+    color: var(--tm-theme-100)
+}
+
+#movie-certification{
+    border: 1px solid white;
+    padding-right: 3px;
+    padding-right: 3px;
+    background-color: black;
+
+}
+/* #endregion styles for movieDetails.html */
