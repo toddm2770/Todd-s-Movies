@@ -1,15 +1,40 @@
 displayNowPlayingMovies()
 
+//display popular movies
 async function displayPopularMovies(){
-    let movies = await getPopularMovies();
+    let movies = await getPopularMovies(); 
+
+    document.getElementById("page-title").innerHTML = "Popular Movies";
 
     displayMovies(movies);
 }
 
+//display now playing movies
 async function displayNowPlayingMovies(){
     let movies = await getNowPlayingMovies();
 
+    document.getElementById("page-title").innerHTML = "Now Playing Movies";
+
     displayMovies(movies);
+}
+
+//display favorite movies
+async function displayFavoriteMovies(){
+    let movies = getFavoriteMovies();
+
+    document.getElementById("page-title").innerHTML = "Favorite Movies";
+
+    displayMovies(movies);
+}
+
+async function displaySearchResults(){
+    let query = document.getElementById("movie-search").value;
+    //'Captain America'
+    let encodedValue = encodeURIComponent(query);
+    let movies = await getMoviesByQuery(encodedValue);
+    document.getElementById("page-title").innerHTML = `Search results for ${query}`;
+    displayMovies(movies);
+    uncheckButtons();
 }
 
 function displayMovies(movies){
@@ -61,6 +86,17 @@ function displayMovies(movies){
     });
 }
 
+//uncheck all the buttons in the button bar
+function uncheckButtons(){
+    let buttons = document.querySelectorAll("#btnBar .btn-check");
+
+    let checkedButton = Array.from(buttons).find(button => button.checked);
+
+    if (checkedButton){
+        checkedButton.checked = false;
+    }
+}
+
 /* #region favorite movies */
 
 async function addFavoriteMovie(btn){
@@ -78,7 +114,21 @@ async function addFavoriteMovie(btn){
             saveFavoriteMovies(favorites);
         }
     }
-    displayNowPlayingMovies();
+    selectAndClickMovieCategory();
+}
+
+async function removeFavoriteMovie(btn){
+
+    let movieId = btn.getAttribute('data-movieid');
+
+    let favorites = getFavoriteMovies();
+
+    if(favorites){
+        //if movie.id is not equal to movieId return favorites
+        favorites = favorites.filter(movie => movie.id != movieId);
+        saveFavoriteMovies(favorites);
+    }
+    selectAndClickMovieCategory();
 }
 
 function getFavoriteMovies(){
@@ -109,16 +159,18 @@ function isFavoriteMovie(movieid){
     return favoriteMovies.some(movie => movie.id == movieid);
 }
 
-function removeFavoriteMovie(btn) {
-    let movieId = btn.getAttribute('data-movieid');
+function selectAndClickMovieCategory(){
 
-    let favorites = getFavoriteMovies();
+    //get all the buttons in the bar
+    let buttons = document.querySelectorAll("#btnBar .btn-check");
 
-    let removeFavorite = favorites.filter(movie => movie.id != movieId);
+    //find the currently selected button
+    let checkedButton = Array.from(buttons).find(button => button.checked);
 
-    saveFavoriteMovies(removeFavorite);
-
-    displayNowPlayingMovies();
+    //call the click event on the checked button
+    if (checkedButton){
+        checkedButton.click();
+    }
 }
 
 /* #endregion favorite movies */

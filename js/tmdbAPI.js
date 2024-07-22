@@ -44,6 +44,29 @@ async function getNowPlayingMovies(){
     }
 }
 
+async function getMoviesByQuery(query){
+
+    //https://api.themoviedb.org/3/search/movie
+    //https://api.themoviedb.org/3/search/movie?query=Captain%20America&include_adult=false&language=en-US&page=1
+    const searchMoviesUrl = `https://api.themoviedb.org/3/search/movie?query=${query}`;
+
+    try{
+        let response = await fetch(searchMoviesUrl,{
+            headers:{
+                'Authorization': `Bearer ${apiKey}`
+                
+            }
+        });
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        let foundMovies = await response.json();
+        return foundMovies.results;
+    } catch (error){
+        console.error(`Search Movies Fetch Error: ${error}`);
+        return [];
+    }
+}
+
 
 /**
  * 
