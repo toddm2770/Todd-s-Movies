@@ -98,6 +98,14 @@ async function displayMovieDetails(){
 
     //display the user rating
     document.getElementById("movie-rating").innerHTML = `${(movie.vote_average * 10).toFixed(0)}% User Score`;
+
+    //load the trailer
+    let videos = await getMovieVideos(movieId);
+    if (videos.length < 1){
+        document.getElementById("btn-trailer").style.display = "none";
+    } else {
+        document.getElementById("btn-trailer").style.display = "block";
+    };
 }
 
 function displayMovies(movies){
@@ -250,3 +258,24 @@ function selectAndClickMovieCategory(){
 }
 
 /* #endregion favorite movies */
+
+//load trailer
+async function loadVideo(){
+    let movieId = new URLSearchParams(window.location.search);
+    const defaultMovieId = "348350";
+    movieId = movieId.get("id") || defaultMovieId;
+
+    let videos = await getMovieVideos(movieId);
+
+    if (videos.length > 0){
+        let defaultVideo = videos[0];
+        videos = videos.filter(videos => videos.type == "Trailer");
+        let trailerVideo = videos[0] || defaultVideo;
+        document.getElementById("movieModalLabel").textContent = trailerVideo.name;
+        document.getElementById("movie-trailer").src = `http://www.youtube.com/embed/${trailerVideo.key}`
+    }
+}
+
+async function unloadVideo(){
+    document.getElementById("movie-trailer").src = "";
+}

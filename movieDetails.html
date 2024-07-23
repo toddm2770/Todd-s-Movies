@@ -170,10 +170,6 @@
     <script src="/js/tmdbAPI.js"></script>
     <script src="/js/site.js"></script>
 
-    <script>
-      displayMovieDetails();
-    </script>
-
     <!--setup movie trailer-->
     <script>
       const movieTrailerModal = document.getElementById("movie-modal");
@@ -182,6 +178,8 @@
 
       //listen for the 'hide.bs.modal' event. this fires when the modal closes
       addEventListener("hide.bs.modal", unloadVideo);
+
+      displayMovieDetails();
     </script>
 </body>
 
