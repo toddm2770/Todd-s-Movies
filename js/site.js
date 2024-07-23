@@ -86,6 +86,18 @@ async function displayMovieDetails(){
     let minutes = movie.runtime % 60;
     let hours = (movie.runtime - minutes) / 60;
     document.getElementById("movie-runtime").textContent = `${hours}h ${minutes}m`;
+
+    //display the movie genres
+    document.getElementById("movie-genres").innerHTML = displayGenres(movie);
+
+    //display movie overview
+    document.getElementById("movie-overview").innerHTML = movie.overview;
+
+    //display movie-tagline
+    document.getElementById("movie-tagline").innerText = movie.tagline;
+
+    //display the user rating
+    document.getElementById("movie-rating").innerHTML = `${(movie.vote_average * 10).toFixed(0)}% User Score`;
 }
 
 function displayMovies(movies){
@@ -138,6 +150,16 @@ function displayMovies(movies){
         movieRow.appendChild(movieCard);
 
     });
+}
+
+function displayGenres(movie){
+    let genresTemplate = "";
+
+    movie.genres.forEach(genre => {
+        genresTemplate += `<span class="badge text-bg-info rounded-pill me-1">${genre.name}</span>`
+    });
+
+    return genresTemplate;
 }
 
 //uncheck all the buttons in the button bar

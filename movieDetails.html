@@ -87,7 +87,22 @@
                       <span id="movie-certification"></span>
                       <span id="movie-release"></span>
                       <span id="movie-runtime"></span>
-                      <div id="movie-genres"></div>
+                      <div id="movie-genres">
+                        //Genres Here
+                      </div>
+                    </div>
+                    <div id="movie-tagline" class="mt-3">Tag Goes Here</div>
+                    <h5 class="lead fw-bold mt-3">
+                      Overview
+                    </h5>
+                    <p id="movie-overview">Movie Overview goes here</p>
+                    <div id="movie-rating">
+
+                    </div>
+                    <div id="btn-trailer" class="mt-3">
+                      <button data-bs-toggle="modal" data-bs-target="#movie-modal" class="btn btn-outline-warning">
+                        <i class="bi bi-play"></i>Play Trailer
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -117,34 +132,32 @@
         </div>
     </footer>
 
-    <!--Template-->
-    <template id="movie-card-template">
-      <div class="col">
-        <div class="card h-100">
-          <img class="card-img-top" alt="Movie Poster" src="https//image.tmdb.org/t/p/w184/https:/image.tmdb.org/t/p/w184/qhb1qOilapbapxWQn9jtRCMwXJF.jpg">
-          <div class="card-body borer-1 border-top">
-            <div class="card-title fw-bold lh-1">
-              Wonka
-            </div>
-            <div class="card-text 1h-1 fst-italic">
-              Willy Wonka - chock-full of ideas and determined to change the world one delectable bite at
-              a time - is proof that the best things in life begin with a dream, and if you're lucky
-              enough to meet Willy Wonka, anything is possible.
+    <!--Modal-->
+    <div class="modal fade" id="movie-modal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="movieModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="ratio ratio-16x9">
+              <iframe id="movie-trailer" src="" allowfullscreen>
+              </iframe>
             </div>
           </div>
-          <div class="card-footer d-flex justify-content-between">
-            <button class="btn btn-outline-success" data-fav="false" onclick="addFavoriteMovie(this)">Add Fav</button>
-            <button class="btn btn-outline-danger" data-fav="true" onclick="removeFavoriteMovie(this)">Remove Fav</button>
-            <a href="" class="btn btn-primary">More Info</a>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
-    </template>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+
 
 
     <script>
@@ -159,6 +172,16 @@
 
     <script>
       displayMovieDetails();
+    </script>
+
+    <!--setup movie trailer-->
+    <script>
+      const movieTrailerModal = document.getElementById("movie-modal");
+      //listen for the show.bs.modal event. fires wehn the modal is displayed
+      addEventListener("show.bs.modal", loadVideo);
+
+      //listen for the 'hide.bs.modal' event. this fires when the modal closes
+      addEventListener("hide.bs.modal", unloadVideo);
     </script>
 </body>
 
