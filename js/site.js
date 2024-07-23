@@ -272,7 +272,7 @@ async function loadVideo(){
         videos = videos.filter(videos => videos.type == "Trailer");
         let trailerVideo = videos[0] || defaultVideo;
         document.getElementById("movieModalLabel").textContent = trailerVideo.name;
-        document.getElementById("movie-trailer").src = `http://www.youtube.com/embed/${trailerVideo.key}`
+        document.getElementById("movie-trailer").src = `https://www.youtube.com/embed/${trailerVideo.key}`
     }
 }
 
