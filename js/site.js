@@ -323,7 +323,7 @@ async function populateDropdownMenu(){
     let genreDropDown = document.getElementById("genre-dropdown-select");
 
     genres.forEach(name =>{
-        let genreName = name;
+        return name;
     })
 }
 
