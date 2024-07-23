@@ -106,6 +106,9 @@ async function displayMovieDetails(){
     } else {
         document.getElementById("btn-trailer").style.display = "block";
     };
+
+    //display the actors for the movie
+    displayMovieCredits(movieId);
 }
 
 function displayMovies(movies){
@@ -168,6 +171,35 @@ function displayGenres(movie){
     });
 
     return genresTemplate;
+}
+
+//display actors
+async function displayMovieCredits(movieId){
+    //get the case from the tmdb api
+    let credits = await getMovieCredits(movieId);
+
+    //pull the top ten actos for the movie
+    let topBilledCast = credits.cast.slice(0,10);
+
+    let slideContainer = document.getElementById("actors-slide-container");
+    slideContainer.innerHTML = "";
+
+    let actorSlideTemplate = document.getElementById("actor-slide");
+
+    topBilledCast.forEach(actor =>{
+        let slide = actorSlideTemplate.content.cloneNode(true);
+
+        if(actor.profile_path != null){
+            slide.querySelector("img").src = `https://image.tmdb.org/t/p/w185${actor.profile_path}`;
+        } else {
+            slide.querySelector("img").src = "/img/profileImage.jpg";
+        }
+
+        slide.querySelector("[data-name]").textContent = actor.name;
+        slide.querySelector("[data-character]").textContent = actor.character;
+
+        slideContainer.appendChild(slide);
+    })
 }
 
 //uncheck all the buttons in the button bar
@@ -279,3 +311,4 @@ async function loadVideo(){
 async function unloadVideo(){
     document.getElementById("movie-trailer").src = "";
 }
+
