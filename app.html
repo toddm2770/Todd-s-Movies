@@ -84,6 +84,12 @@
 
                   <input onclick="displayFavoriteMovies()" type="radio" class="btn-check" name="btnRadio" id="btnFavorites" autocomplete="off">
                   <label class="btn btn-outline-success" for="btnFavorites">Favorites</label>
+                  <div class="dropdown ms-1">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Pick a Genre
+                    </button>
+                    <!--Genres Go Here-->
+                  </div>
                 </div>
               </div>
               <div class="col order-first">
@@ -123,7 +129,14 @@
         </div>
     </footer>
 
-    <!--Template-->
+    <!--Dropdown Template-->
+    <template id="genre-dropdown-select">
+      <ul class="dropdown-menu">
+        <li><button onclick="displayMoviesByGenre()" class="dropdown-item" type="button">Thriller</button></li>
+      </ul>
+    </template>
+
+    <!--Card Template-->
     <template id="movie-card-template">
       <div class="col">
         <div class="card h-100">

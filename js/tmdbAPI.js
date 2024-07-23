@@ -167,3 +167,24 @@ async function getMovieCredits(movieId){
         return [];
     }
 }
+
+async function getAllGenres(){
+    //https://api.themoviedb.org/3/genre/movie/list
+
+    const genreUrl = `https://api.themoviedb.org/3/genre/movie/list`;
+    try{
+        let response = await fetch(genreUrl,{
+            headers:{
+                'Authorization': `Bearer ${apiKey}`
+            }
+        });
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        let genre = await response.json();
+        return genre;
+    } catch (error){
+        console.error(`Get Credits Fetch Error: ${error}`);
+        return [];
+    }
+}
+

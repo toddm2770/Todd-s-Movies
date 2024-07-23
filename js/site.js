@@ -1,4 +1,8 @@
-
+//display movies by genre
+async function displayMoviesByGenre(genre){
+    let selectedGenre = genre;
+    return selectedGenre;
+}
 
 //display popular movies
 async function displayPopularMovies(){
@@ -312,3 +316,15 @@ async function unloadVideo(){
     document.getElementById("movie-trailer").src = "";
 }
 
+
+async function populateDropdownMenu(){
+
+    let genres = await getAllGenres();
+    let genreDropDown = document.getElementById("genre-dropdown-select");
+
+    genres.forEach(name =>{
+        let genreName = name;
+    })
+}
+
+populateDropdownMenu();
